@@ -1,0 +1,40 @@
+@hostname = http://localhost
+@port = 9000
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+
+GET {{host}}/user/612cfef87de53054f2b355d6
+
+###
+
+POST {{host}}/user
+Content-Type: {{contentType}}
+
+{
+  "name": "Jonathan L. M. Diniz",
+  "pantryName": "Despensa 1",
+  "pantryId": "9168b6a7-96de-45bc-a788-8a10f861adbc"
+}
+
+###
+
+PUT {{host}}/user/612cfef87de53054f2b355d6
+Content-Type: {{contentType}}
+
+{
+  "name": "Jonathan Diniz",
+  "pantryName": "Despensa 2",
+  "pantryId": "9168b6a7-96de-45bc-a788-8a10f861adbc"
+}
+
+###
+
+DELETE  {{host}}/user/612cfef87de53054f2b355d6
+
+###
+
+
+GET {{host}}/pantry/add-item/7894900700046/612d00ebc726a9aa7f570f2b
+
+###
+

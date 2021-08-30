@@ -14,6 +14,7 @@ const user = new mongoose.Schema({
   name: String,
   pantry: {
     name: String,
+    uuid: String,
     items: [
       {
         barcode: String,

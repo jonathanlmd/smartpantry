@@ -15,7 +15,7 @@ async function addItem(request, response) {
     throw new Error("Missing api access token.");
   }
   // Check if exist in database;
-  const storedProduct = await Product.findOne({ barcode }).exec();
+  const storedProduct = await Product.findOne({ barcode });
 
   if (!storedProduct) {
     //If not exist, insert;
@@ -84,20 +84,13 @@ async function addItem(request, response) {
 
   if (itemIndex < 0) {
     user.pantry.items.push({
-      id: item.barcode,
+      barcode: item.barcode,
       quantity: 1,
     });
   } else {
-    user.pantry.items[itemIndex] = user.pantry.items[itemIndex].quantity + 1;
+    user.pantry.items[itemIndex].quantity++;
   }
-
-  const pushReq = await user.save();
-
-  if (!pushReq) {
-    return response.status(400).json({
-      message: "Error in insert item in pantry.",
-    });
-  }
+  await user.save();
 
   return response.json(user);
 }
