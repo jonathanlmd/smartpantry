@@ -10,6 +10,6 @@ app.use(express.json());
 
 app.use(routes);
 
-app.listen(9000, (req, res) => {
-  console.log("[SERVER STARTED]: Port 9000");
+app.listen(process.env.PORT, () => {
+  console.log(`[SERVER STARTED]: Port ${process.env.PORT}`);
 });

@@ -82,8 +82,6 @@ async function addItem(request, response) {
     (element) => element.barcode === item.barcode
   );
 
-  console.log("AAA", user.pantry.items);
-
   if (itemIndex < 0) {
     user.pantry.items.push({
       id: item.barcode,

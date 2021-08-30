@@ -6,6 +6,7 @@
   "author": "Jonathan Lucas de Matos Diniz",
   "license": "MIT",
   "scripts": {
+    "start": "node ./src/main.js",
     "serve": "dotenv-load node ./src/main.js",
     "dev": "dotenv-load nodemon ./src/main.js"
   },
