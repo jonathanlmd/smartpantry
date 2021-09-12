@@ -10,13 +10,13 @@ async function login(request, response) {
   });
 
   if (!user) {
-    throw new AppError("Email/password incorretos.", 401);
+    throw new AppError("Usuário/Senha incorretos.", 401);
   }
 
   const passwordMatched = await compareHash(password, user.password);
 
   if (!passwordMatched) {
-    throw new AppError("Email/password incorretos.", 401);
+    throw new AppError("Usuário/Senha incorretos.", 401);
   }
 
   const { password: _, ...userWithoutPassword } = user._doc;
