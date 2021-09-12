@@ -10,19 +10,21 @@ const product = new mongoose.Schema({
   updated_date: Date,
 });
 
-const user = new mongoose.Schema({
-  username: String,
-  password: String,
-  pantry: {
-    name: String,
-    uuid: String,
-    items: [
-      {
-        barcode: String,
-        quantity: Number,
-      },
-    ],
-  },
+const pantry = new mongoose.Schema({
+  name: String,
+  items: [
+    {
+      barcode: String,
+      quantity: Number,
+    },
+  ],
 });
 
-export { product, user };
+const user = new mongoose.Schema({
+  username: String,
+  name: String,
+  password: String,
+  pantry: [String],
+});
+
+export { product, user, pantry };
