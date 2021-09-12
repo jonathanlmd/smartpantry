@@ -33,7 +33,10 @@ async function insert(request, response) {
 
   const user = await User.findById(userId);
 
-  user.pantry.push(savedPantry._id);
+  user.pantry.push({
+    id: savedPantry._id,
+    name,
+  });
 
   const userResponse = await user.save();
 
