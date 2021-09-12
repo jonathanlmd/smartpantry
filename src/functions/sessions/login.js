@@ -19,7 +19,12 @@ async function login(request, response) {
     throw new AppError("Email/password incorretos.", 401);
   }
 
-  return response.json(user);
+  const { password: _, ...userWithoutPassword } = user._doc;
+
+  return response.json({
+    id: user._id,
+    ...userWithoutPassword,
+  });
 }
 
 export default login;
