@@ -6,7 +6,7 @@ async function getById(request, response) {
 
   if (!user) {
     return response.status(401).json({
-      message: "User not found.",
+      message: "Usuário não encontrado.",
     });
   }
 

@@ -105,11 +105,7 @@ async function handleMqtt() {
 
           const user = await User.findById(id);
 
-          if (!user) {
-            return response.status(400).json({
-              message: "User not found.",
-            });
-          }
+          if (!user) return;
 
           const itemIndex = user.pantry.items.findIndex(
             (element) => element.barcode === item.barcode
