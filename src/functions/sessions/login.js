@@ -1,6 +1,5 @@
 import { User } from "../../db/models.js";
 import { compareHash } from "../../providers/hashProvider.js";
-import "express-async-errors";
 import AppError from "../../errors/AppError.js";
 
 async function login(request, response) {

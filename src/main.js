@@ -1,3 +1,4 @@
+import "express-async-errors";
 import express from "express";
 import helmet from "helmet";
 import cors from "cors";
@@ -15,6 +16,8 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(routes);
+
 app.use((err, request, response, _) => {
   if (err instanceof AppError) {
     return response.status(err.statusCode).json({
@@ -30,8 +33,6 @@ app.use((err, request, response, _) => {
     message: "internal server error.",
   });
 });
-
-app.use(routes);
 
 handleMqtt();
 
