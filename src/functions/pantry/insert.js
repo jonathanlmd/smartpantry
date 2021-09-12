@@ -5,6 +5,10 @@ import { Pantry, User } from "../../db/models.js";
 async function insert(request, response) {
   const { pantryHash, name, userId } = request.body;
 
+  if (!pantryHash || !name || !userId) {
+    throw new AppError("Dados faltando.", 400);
+  }
+
   const decoded = await decodeBase64(pantryHash);
 
   const hashRes = await compareHash(process.env.PANTRY_APP_KEY, decoded);
