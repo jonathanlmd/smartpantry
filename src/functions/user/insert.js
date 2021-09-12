@@ -3,7 +3,7 @@ import { generateHash } from "../../providers/hashProvider.js";
 import AppError from "../../errors/AppError.js";
 
 async function insert(request, response) {
-  const { username, password } = request.body;
+  const { username, password, confirmPassword } = request.body;
 
   const hashedPass = await generateHash(password);
 
@@ -13,6 +13,9 @@ async function insert(request, response) {
 
   if (existentUser) {
     throw new AppError("Usuário já existe.", 400);
+  }
+  if (password !== confirmPassword) {
+    throw new AppError("Senha e confirmação não conferem.", 400);
   }
 
   const user = new User({
