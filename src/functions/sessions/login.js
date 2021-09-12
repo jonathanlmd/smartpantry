@@ -1,14 +1,11 @@
 import { User } from "../../db/models.js";
-import { compareHash } from "./hashProvider";
+import { compareHash } from "./hashProvider.js";
 
 async function login(request, response) {
-  const { password, user } = request.body;
-  const user = await User.findOne({
-    username: user,
-  });
+  const { password, username } = request.body;
 
   const user = await User.findOne({
-    username: user,
+    username,
   });
 
   if (!user) {
