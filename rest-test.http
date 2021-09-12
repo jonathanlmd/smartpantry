@@ -1,7 +1,10 @@
 @hostname = http://localhost
+# @hostname = http://ec2-34-229-201-239.compute-1.amazonaws.com
 @port = 9000
 @host = {{hostname}}:{{port}}
 @contentType = application/json
+
+### Users
 
 GET {{host}}/user/612cfef87de53054f2b355d6
 
@@ -38,5 +41,17 @@ DELETE  {{host}}/user/612cfef87de53054f2b355d6
 
 GET {{host}}/pantry/add-item/7894900700046/612d00ebc726a9aa7f570f2b
 
+### Pantry
+
+GET {{host}}/pantry
+
 ###
 
+POST {{host}}/pantry
+Content-Type: {{contentType}}
+
+{
+  "name": "Teste",
+  "pantryHash": "JDJhJDA5JGpYSnBtMnR2LzRyOE5DQVBMdnRVei5NMlo1Nzl5amRCN0lHYmxGNWNNUlRYaXV4TnFldDBH",
+  "userId": "613da818635f5be40cc48d41"
+}

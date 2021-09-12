@@ -5,6 +5,9 @@ export async function generateHash(payload) {
 }
 
 export async function decodeBase64(payload) {
+  return Buffer.from(payload, "base64").toString();
+}
+export async function encodeBase64(payload) {
   return Buffer.from(payload).toString("base64");
 }
 

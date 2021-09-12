@@ -3,6 +3,7 @@ import AppError from "../../errors/AppError.js";
 import { Pantry, User } from "../../db/models.js";
 
 async function insert(request, response) {
+  console.log(request.body);
   const { pantryHash, name, userId } = request.body;
 
   if (!pantryHash || !name || !userId) {
@@ -10,6 +11,8 @@ async function insert(request, response) {
   }
 
   const decoded = await decodeBase64(pantryHash);
+  console.log("Base64: ", pantryHash);
+  console.log("Decoded: ", decoded);
 
   const hashRes = await compareHash(process.env.PANTRY_APP_KEY, decoded);
 
