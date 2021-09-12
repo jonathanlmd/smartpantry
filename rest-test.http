@@ -12,6 +12,8 @@ Content-Type: {{contentType}}
 
 {
   "name": "Jonathan L. M. Diniz",
+  "username": "joanthan",
+  "password": "1234",
   "pantryName": "Despensa 1",
   "pantryId": "9168b6a7-96de-45bc-a788-8a10f861adbc"
 }

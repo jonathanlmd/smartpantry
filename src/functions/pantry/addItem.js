@@ -1,5 +1,6 @@
 import { Product, User } from "../../db/models.js";
 import axios from "axios";
+import AppError from "../../errors/AppError.js";
 
 async function addItem(request, response) {
   const { barcode, id } = request.params;
@@ -12,7 +13,7 @@ async function addItem(request, response) {
   }
 
   if (!process.env.ACCESS_TOKEN) {
-    throw new Error("Missing api access token.");
+    throw new AppError("Token de acesso da api não informado.", 500);
   }
   // Check if exist in database;
   const storedProduct = await Product.findOne({ barcode });

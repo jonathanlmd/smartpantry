@@ -11,7 +11,8 @@ const product = new mongoose.Schema({
 });
 
 const user = new mongoose.Schema({
-  name: String,
+  username: String,
+  password: String,
   pantry: {
     name: String,
     uuid: String,

@@ -1,5 +1,7 @@
 import { User } from "../../db/models.js";
-import { compareHash } from "./hashProvider.js";
+import { compareHash } from "../../providers/hashProvider.js";
+import "express-async-errors";
+import AppError from "../../errors/AppError.js";
 
 async function login(request, response) {
   const { password, username } = request.body;
@@ -9,13 +11,13 @@ async function login(request, response) {
   });
 
   if (!user) {
-    throw new Error("Email/password incorretos.", 401);
+    throw new AppError("Email/password incorretos.", 401);
   }
 
   const passwordMatched = await compareHash(password, user.password);
 
   if (!passwordMatched) {
-    throw new Error("Email/password incorretos.", 401);
+    throw new AppError("Email/password incorretos.", 401);
   }
 
   return response.json(user);

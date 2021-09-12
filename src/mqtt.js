@@ -2,6 +2,7 @@ import connectOptions from "./config/mqtt.js";
 import mqtt from "mqtt";
 import { Product, User } from "./db/models.js";
 import axios from "axios";
+import AppError from "./errors/AppError.js";
 
 async function handleMqtt() {
   const client = mqtt.connect(
@@ -10,7 +11,7 @@ async function handleMqtt() {
   );
 
   client.on("error", (error) => {
-    throw new Error(`Fail to connect with broker: ${error.message}`);
+    throw new AppError(`Falha ao conectar com o broker: ${error.message}`, 500);
   });
 
   client.on("connect", async (packet) => {
@@ -18,7 +19,7 @@ async function handleMqtt() {
 
     client.subscribe(["pantry.add"], (error) => {
       if (error) {
-        throw new Error(`Error to subscribe: ${error.message}`);
+        throw new AppError(`Erro ao subscrever: ${error.message}`, 500);
       }
     });
 
@@ -42,7 +43,7 @@ async function handleMqtt() {
           console.log("Access");
 
           if (!process.env.ACCESS_TOKEN) {
-            throw new Error("Missing api access token.");
+            throw new AppError("Token de acesso da api não informado.", 500);
           }
 
           console.log("Find");
