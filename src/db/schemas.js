@@ -24,7 +24,12 @@ const user = new mongoose.Schema({
   username: String,
   name: String,
   password: String,
-  pantry: [String],
+  pantry: [
+    {
+      id: String,
+      name: String,
+    },
+  ],
 });
 
 export { product, user, pantry };
