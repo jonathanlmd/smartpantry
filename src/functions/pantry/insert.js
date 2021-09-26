@@ -22,6 +22,7 @@ async function insert(request, response) {
 
   const pantry = new Pantry({
     name,
+    hash: pantryHash,
     items: [],
   });
 

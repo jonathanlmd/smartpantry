@@ -12,6 +12,7 @@ const product = new mongoose.Schema({
 
 const pantry = new mongoose.Schema({
   name: String,
+  hash: String,
   items: [
     {
       barcode: String,
