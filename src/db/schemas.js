@@ -6,6 +6,7 @@ const product = new mongoose.Schema({
   image: String,
   brand: String,
   unity: String,
+  averagePrice: Number | String,
   created_date: Date,
   updated_date: Date,
 });

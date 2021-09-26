@@ -4,6 +4,7 @@ const connectOptions = {
     : undefined,
   host: process.env.MQTT_CREDENTIALS_HOST,
   protocol: process.env.MQTT_CREDENTIALS_PROTOCOL,
+  path: process.env.MQTT_PATH || "/",
 };
 
 export default connectOptions;

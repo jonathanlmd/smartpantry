@@ -1,6 +1,6 @@
 import connectOptions from "./config/mqtt.js";
 import mqtt from "mqtt";
-import { Product, User } from "./db/models.js";
+import { Pantry, Product, User } from "./db/models.js";
 import axios from "axios";
 import AppError from "./errors/AppError.js";
 
@@ -62,6 +62,7 @@ async function handleMqtt() {
                 name: res.data.return.nome,
                 barcode: res.data.return.ean,
                 image: res.data.return.imagem_produto,
+                averagePrice: res.data.return.preco_medio,
                 brand: res.data.return.marca_nome,
                 unity: res.data.return.tipo_embalagem,
                 created_date: new Date().toISOString(),
@@ -75,6 +76,7 @@ async function handleMqtt() {
                 barcode: dbData.barcode,
                 name: dbData.name,
                 image: dbData.image,
+                averagePrice: dbData.averagePrice,
                 brand: dbData.brand,
                 unity: dbData.unity,
                 created_date: dbData.created_date,
@@ -91,6 +93,7 @@ async function handleMqtt() {
               barcode: storedProduct.barcode,
               name: storedProduct.name,
               image: storedProduct.image,
+              averagePrice: storedProduct.averagePrice,
               brand: storedProduct.brand,
               unity: storedProduct.unity,
               created_date: storedProduct.created_date,
@@ -104,25 +107,27 @@ async function handleMqtt() {
             });
           }
 
-          const user = await User.findById(id);
+          const pantry = await Pantry.findOne({
+            hash: id,
+          });
 
-          if (!user) return;
+          if (!pantry) return;
 
-          const itemIndex = user.pantry.items.findIndex(
+          const itemIndex = pantry.items.findIndex(
             (element) => element.barcode === item.barcode
           );
 
           if (itemIndex < 0) {
-            user.pantry.items.push({
+            pantry.items.push({
               barcode: item.barcode,
               quantity: 1,
             });
           } else {
-            user.pantry.items[itemIndex].quantity++;
+            pantry.items[itemIndex].quantity++;
           }
-          await user.save();
+          await pantry.save();
 
-          client.publish("pantry.added", payload);
+          client.publish(`pantry.added.${id}`, JSON.stringify(item));
         }
       } catch (err) {
         console.log({ Erro: err });
