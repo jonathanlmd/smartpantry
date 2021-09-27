@@ -56,6 +56,12 @@ Content-Type: {{contentType}}
   "userId": "613da818635f5be40cc48d41"
 }
 
+###
+
+GET {{host}}/pantry/items/613da818635f5be40cc48d41
+Content-Type: {{contentType}}
+
+
 ### Login
 
 POST {{host}}/sessions/login
