@@ -22,6 +22,7 @@ async function get(request, response) {
       (element) => element.barcode === item.barcode
     );
     return {
+      id: item._id,
       ...item._doc,
       quantity: product.quantity,
     };
