@@ -62,6 +62,23 @@ GET {{host}}/pantry/items/613da818635f5be40cc48d41
 Content-Type: {{contentType}}
 
 
+
+###
+
+PUT {{host}}/pantry/item-quantity
+Content-Type: {{contentType}}
+
+{
+  "pantryId": "6150d0bf4988df1e2ae7cd10",
+  "barcode": "7894900011159",
+  "quantity": 10
+}
+
+###
+
+DELETE {{host}}/pantry/delete-item/6150d0bf4988df1e2ae7cd10/7894900011159
+Content-Type: {{contentType}}
+
 ### Login
 
 POST {{host}}/sessions/login
