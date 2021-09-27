@@ -22,7 +22,10 @@ async function updateQuantity(request, response) {
   console.log(pantry.items[index]);
 
   if (index >= 0) {
-    pantry.items[index] = { ...pantry.items[index], quantity: quantity };
+    pantry.items[index] = {
+      barcode: pantry.items[index].barcode,
+      quantity: quantity,
+    };
   }
 
   await pantry.save();

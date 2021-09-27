@@ -1,5 +1,5 @@
-@hostname = http://localhost
-# @hostname = http://ec2-34-229-201-239.compute-1.amazonaws.com
+# @hostname = http://localhost
+@hostname = http://ec2-34-229-201-239.compute-1.amazonaws.com
 @port = 9000
 @host = {{hostname}}:{{port}}
 @contentType = application/json
